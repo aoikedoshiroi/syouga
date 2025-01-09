@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask + Gradio Integration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Flask + Gradio Example</h1>
+    <p>Enter text to reverse it:</p>
+    <input type="text" id="input-text" placeholder="Type something here..." />
+    <button onclick="reverseText()">Submit</button>
+    <p id="result"></p>
+
+    <script>
+        async function reverseText() {
+            const text = document.getElementById("input-text").value;
+            const response = await fetch("https://syouga.onrender.com/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text }),
+            });
+
+            const data = await response.json();
+            document.getElementById("result").innerText = `Reversed: ${data.reversed_text}`;
+        }
+    </script>
+</body>
+</html>
